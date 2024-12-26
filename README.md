@@ -1,5 +1,9 @@
 # Simple weighing scale with HX711 and ESP32
 
+## Demo
+
+The project can be tested using wokwi [here](https://wokwi.com/projects/418191710587949057).
+
 ## Prerequisites
 
 Follow [this guide](https://github.com/esp-rs/esp-idf-template#prerequisites) and make sure you have all the prerequisites installed.
