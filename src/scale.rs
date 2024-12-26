@@ -172,7 +172,7 @@ impl<'a, T: OutputPin, S: InputPin> Scale<'a, T, S> {
         self.hx711.set_scale(scale_factor);
         self.scale_factor = Some(scale_factor);
 
-        text_drawer.draw_text_clear_flush("Calibration complete", Point::zero())?;
+        text_drawer.draw_text_clear_flush("Calibration done", Point::zero())?;
 
         println!("Calibration complete. Scale factor = {}", scale_factor);
         println!("Saving calibration to NVS partition...");
