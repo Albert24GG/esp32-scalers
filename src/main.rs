@@ -70,7 +70,7 @@ fn main() -> anyhow::Result<()> {
             let fmt_string = if grams.abs() > 1000.0 {
                 format!("Weight: {:.2}kg", grams / 1000.0)
             } else {
-                format!("Weight {}g", grams.round_ties_even() as i32)
+                format!("Weight: {}g", grams.round() as i32)
             };
             text_drawer.draw_text_clear_flush(&fmt_string, Point::zero())?;
         }
