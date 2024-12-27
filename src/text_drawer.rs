@@ -9,7 +9,7 @@ use embedded_graphics::{
 use ssd1306::{
     mode::BufferedGraphicsMode, prelude::WriteOnlyDataCommand, size::DisplaySize, Ssd1306,
 };
-use std::fmt;
+use thiserror::Error;
 
 pub struct TextDrawer<'a, DI, SIZE: DisplaySize> {
     display: Ssd1306<DI, SIZE, BufferedGraphicsMode<SIZE>>,
@@ -18,22 +18,13 @@ pub struct TextDrawer<'a, DI, SIZE: DisplaySize> {
     bounds: Rectangle,
 }
 
-#[derive(Debug)]
+#[derive(Error, Debug)]
 pub enum TextError<E: std::fmt::Debug> {
+    #[error("Drawing error: {0:?}")]
     DrawError(E),
+    #[error("Text does not fit within the display bounds")]
     DoesNotFit,
 }
-
-impl<E: std::fmt::Debug> fmt::Display for TextError<E> {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            TextError::DoesNotFit => write!(f, "Text does not fit within the display bounds"),
-            TextError::DrawError(err) => write!(f, "Drawing error: {:?}", err),
-        }
-    }
-}
-
-impl<E: std::fmt::Debug + 'static> std::error::Error for TextError<E> {}
 
 pub type DisplayType<DI, SIZE> = Ssd1306<DI, SIZE, BufferedGraphicsMode<SIZE>>;
 pub type DisplayError<DI, SIZE> = <DisplayType<DI, SIZE> as DrawTarget>::Error;
